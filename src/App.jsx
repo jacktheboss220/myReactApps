@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -7,22 +7,21 @@ import Content from './components/content/Content';
 import Adder from './components/addItems/Adder';
 
 const App = () => {
-  const [items, setItems] = useState(localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []);
-
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem('items') || []));
   const [newItem, setNewItem] = useState('');
 
   const [search, setSearch] = useState('');
 
-  const saveToLocalStorage = (items) => {
-    setItems(items);
+  useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
-  }
+  }, [items]);
+
 
   const handleDelete = (id) => {
     const newItem = items.filter((item) => {
       return item.id !== id;
     });
-    saveToLocalStorage(newItem);
+    setItems(newItem);
   }
 
   const handleCheck = (id) => {
@@ -32,7 +31,7 @@ const App = () => {
       }
       return item;
     });
-    saveToLocalStorage(newItem);
+    setItems(newItem);
   }
 
   const handleAdd = (e) => {
@@ -42,7 +41,7 @@ const App = () => {
       checked: false,
       name: e.target[0].value
     }
-    saveToLocalStorage([...items, newItem]);
+    setItems([...items, newItem]);
     setNewItem('');
   }
 

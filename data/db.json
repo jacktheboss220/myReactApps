@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "id": 0,
+      "checked": false,
+      "name": "Milk"
+    },
+    {
+      "id": 1,
+      "checked": false,
+      "name": "Dog food"
+    },
+    {
+      "id": 2,
+      "checked": false,
+      "name": "cat food"
+    },
+    {
+      "id": 3,
+      "checked": false,
+      "name": "ice cream"
+    }
+  ]
+}
